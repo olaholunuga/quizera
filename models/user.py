@@ -2,16 +2,16 @@
 """user model"""
 from hashlib import md5
 from app import db, UserMixin
-from basemodel import BaseModel
+from .basemodel import BaseModel
 
 
 class User(BaseModel, UserMixin, db.Model):
     __tablename__ = "users"
-    username = db.Column(db.String(128), nullable=False)
     first_name = db.Column(db.String(128), nullable=True)
     last_name = db.Column(db.String(128), nullable=True)
     password = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), nullable=False)
+    tests = db.relationship("Test", backref="user")
 
 
     def __setattr__(self, name, value):

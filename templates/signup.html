@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Sign Up</h3>
+    <div class="box">
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert">
+                    x
+            </button>
+            {{ message }}
+        </div>
+        {% endfor %} -->
+
+        <form method="POST">
+            {{ form.csrf_token }}
+
+            <div class="field">
+                <div class="control">
+                    <fieldset class="name">
+                        <!-- {{ form.first_name.label }} -->
+                        {{ form.first_name(placeholder='John', class="name input is-large") }}
+                        {% if form.first_name.errors %}
+                          <ul class="errors">
+                            {% for error in form.first_name.errors %}
+                              <li>{{ error }}</li>{% endfor %}
+                          </ul>
+                        {% endif %}
+                      </fieldset>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <fieldset class="name">
+                        <!-- {{ form.last_name.label }} -->
+                        {{ form.last_name(placeholder='Smith', class="input is-large") }}
+                        {% if form.last_name.errors %}
+                          <ul class="errors">
+                            {% for error in form.last_name.errors %}
+                              <li>{{ error }}</li>{% endfor %}
+                          </ul>
+                        {% endif %}
+                      </fieldset>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <!-- <input class="input is-large" type="email" name="email" placeholder="Email" autofocus=""> -->
+                    <fieldset class="email">
+                        <!-- {{ form.email.label }} -->
+                        {{ form.email(placeholder='youremail@example.com', class="input is-large") }}
+                        {% if form.email.errors %}
+                          <ul class="errors">
+                            {% for error in form.email.errors %}
+                              <li>{{ error }}</li>{% endfor %}
+                          </ul>
+                        {% endif %}
+                      </fieldset>
+                </div>
+            </div>
+
+            <!-- <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
+                </div>
+            </div> -->
+
+            <div class="field">
+                <div class="control">
+                    <!-- <input class="input is-large" type="password" name="password" placeholder="Password"> -->
+                    <fieldset class="password">
+                        <!-- {{ form.password.label }} -->
+                        {{ form.password(placeholder="Password", class="input is-large") }}
+                        {% if form.password.errors %}
+                          <ul class="errors">
+                            {% for error in form.password.errors %}
+                              <li>{{ error }}</li>{% endfor %}
+                          </ul>
+                        {% endif %}
+                      </fieldset>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <!-- <input class="input is-large" type="password" name="password" placeholder="Password"> -->
+                    <fieldset class="confirm">
+                        <!-- {{ form.confirm.label }} -->
+                        {{ form.confirm(placeholder="Confirm Password", class="input is-large") }}
+                        {% if form.confirm.errors %}
+                          <ul class="errors">
+                            {% for error in form.confirm.errors %}
+                              <li>{{ error }}</li>{% endfor %}
+                          </ul>
+                        {% endif %}
+                      </fieldset>
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">{{ form.submit }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

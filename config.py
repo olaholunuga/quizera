@@ -1,0 +1,15 @@
+from os import getenv
+
+
+QZR_MYSQL_USER = getenv("QZR_MYSQL_USER")
+QZR_MYSQL_PWD = getenv("QZR_MYSQL_PWD")
+QZR_MYSQL_HOST = getenv("QZR_MYSQL_HOST")
+QZR_MYSQL_DB = getenv("QZR_MYSQL_DB")
+
+class Config(object):
+    SECRET_KEY = getenv("SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = "mysql://{}:{}@{}/{}".format(QZR_MYSQL_USER, QZR_MYSQL_PWD, QZR_MYSQL_HOST, QZR_MYSQL_DB)
+    STATIC_FOLDER = 'static'
+    TEMPLATES_FOLDER = 'templates'
+    SESSION_COOKIE_NAME = getenv("SESSION_COOKIE_NAME")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
