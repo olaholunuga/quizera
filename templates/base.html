@@ -18,6 +18,9 @@
             <nav class="navbar">
                 <div class="container">
                     <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar">
+                            <i>Quizera</i>
+                        </div>
                         <div class="navbar-end">
                             <a href="{{ url_for('main.landing') }}" class="navbar-item">
                                 Home
@@ -52,7 +55,8 @@
     </section>
 
     <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='mustache.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='main-script.js') }}"></script>
 </body>
 
 </html>

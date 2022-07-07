@@ -1,9 +1,130 @@
-{% extends "base.html" %}
-{% block content %}
-<h1 class="title">
-    Quizera welcomes you
-</h1>
-<h2 class="subtitle">
-    the online standardized test platform
-</h2>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" /> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+    <style type="text/css">
+        .hero {
+            background-image: url("{{ url_for('static', filename='images/landing_cover.jpg') }}");
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+
+        <div id="intro">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        
+                        <div class="navbar">
+                            <i>Quizera</i>
+                            <a href="#features" class="navbar-item">
+                                Features
+                            </a>
+                            <a href="#about" class="navbar-item">
+                                About
+                            </a>
+                        </div>
+    
+                        <div class="navbar-end">
+                            <a href="{{ url_for('main.landing') }}" class="navbar-item">
+                                Home
+                            </a>
+                            <a href="{{ url_for('main.dashboard') }}" class="navbar-item">
+                                Profile
+                            </a>
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                                Login
+                            </a>
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                                Sign Up
+                            </a>
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                            <a href="{{ url_for('main.test_form') }}" class="navbar-item">
+                                Take test
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <i><strong>Quizera</strong></i>
+                <p>An online Educational standardized test platform</p>
+                <a href="{{ url_for('main.test_form') }}" class="button is-large">Take test</a>
+                
+            </div>
+            </div>
+        </div>
+    </section>
+    <section id="features">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-third">
+                    <img src="{{ url_for('static', filename='images/login.png') }}" alt="LogIn" sizes="" srcset="">
+                </div>
+                <div class="column is-two-thirds">
+                    <h3>LogIn Feature</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ut sed, at minus illum cupiditate dignissimos quisqu
+                        am quia blanditiis nemo, ea voluptas maiores porro assumenda, 
+                        voluptates dolore laboriosam quaerat odio ex.</p>
+                </div>
+            </div>
+
+            <div class="columns">
+              <div class="column is-one-third">
+                <img src="{{ url_for('static', filename='images/signup.png') }}" alt="SignUp" sizes="" srcset="">
+
+              </div>
+              <div class="column is-two-thirds">
+                  <h3>signUp Feature</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Ut sed, at minus illum cupiditate dignissimos quisqu
+                    am quia blanditiis nemo, ea voluptas maiores porro assumenda, 
+                    voluptates dolore laboriosam quaerat odio ex.</p>
+              </div>
+          </div>
+
+          <div class="columns">
+              <div class="column is-one-third">
+                <img src="{{ url_for('static', filename='images/test.png') }}" alt="Test" sizes="" srcset="">
+              </div>
+              <div class="column is-two-thirds">
+                  <h3>Test</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Ut sed, at minus illum cupiditate dignissimos quisqu
+                    am quia blanditiis nemo, ea voluptas maiores porro assumenda, 
+                    voluptates dolore laboriosam quaerat odio ex.</p>
+              </div>
+          </div>
+          </div>
+
+    </section>
+    <section id="about">
+        <div class="container" id="about">
+            <div class="box">
+                <h1>About Project</h1>
+                <p>A particular motivation for this project was that when i was asked to do a project for my portfolio.
+                    The project met me when we university students in nigeria where not in school because of the infamous ASUU strike
+                    started in Febuary of the year 2022.</p>
+                <a href="https://" target="_blank" rel="noopener noreferrer">Olaoluwa Olunuga</a>
+                <a href="http://github.com/olaholunuga/quizera" target="_blank" rel="noopener noreferrer">Quizera Repo</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

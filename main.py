@@ -9,6 +9,9 @@ from models.test import Test
 
 main = Blueprint("main", __name__)
 
+
+from app import db, login_manager
+
 # @main.route("/")
 # def index():
 #     """welcome page for all users"""
@@ -42,20 +45,20 @@ def dashboard():
 @login_required
 def test_view(id):
     """main test method"""
+    user = current_user._get_current_object()
     if id:
-        pass
+        return "hello"
 
-    # if request.method == "GET":
-    #     test = Test.query.filter_by(id=id).first()
-    #     if not test or len(options.split("_")) > 3 or len(options.split("_")) < 3:
-    #         abort(404)
-    #     category, difficulty, country = options.split("_")
-    #     return render_template(
-    #         "test.html",
-    #         category=category,
-    #         difficulty=difficulty,
-    #         country=country
-    #     )
+    if request.method == "GET":
+        test = Test.query.filter_by(user_id=user.id).all()
+        return jsonify(test)
+    else:
+        data = request.get_json()
+        user_id = user.id
+        test = Test(user_id=user_id, subject=data.subject, score=data.score)
+        db.session.add(test)
+        db.session.commit()
+        return jsonify(test)
 
 
 @main.route("/test", methods=["GET"])

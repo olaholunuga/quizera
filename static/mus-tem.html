@@ -1,0 +1,17 @@
+<div id="{{ index }}">
+    <div class="field">
+        <div class="control">
+            <p>{{ question }}</p>
+        </div>
+    </div>
+    {{#questions}}
+    <div class="field">
+        <div class="control">
+            <input type="radio" name="{{.}}" id="pick">
+            <label for="{{.}}">{{.}}</label>
+        </div>
+    </div>
+    {{/questions}}
+
+    <button class="button next" index="0"> next > </button>
+</div>
