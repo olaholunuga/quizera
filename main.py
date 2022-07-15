@@ -34,31 +34,65 @@ def landing():
 @login_required
 def dashboard():
     """user info page"""
+    user = current_user._get_current_object()
+    user_tests = user.tests
     return render_template(
         "dashboard.html",
         current_user=current_user,
+        tests=user_tests,
         title="Quizera Dashboard"
     )
 
-@main.route("/tests", methods=["GET", "POST"])
+
 @main.route("/tests/<id>", methods=["GET", "PUT"])
 @login_required
-def test_view(id):
+def tests_view(id):
     """main test method"""
     user = current_user._get_current_object()
+    data = request.get_json()
     if id:
-        return "hello"
+        tests = user.tests
+        for test in tests:
+            if test.id == id:
+                single_test = test
+        if request.method == "GET":
+            if single_test:
+                return jsonify(single_test)
+            else:
+                abort(404)
+        else:
+            if not data:
+                return jsonify({"error": "No data sent"})
+            for k, v in data.items():
+                if k != "user_id":
+                    setattr(single_test, k, v)
+            db.session.add(single_test)
+            db.session.commit()
+            return jsonify(single_test)
+    else:
+        return jsonify({"error": "no valid id"})
+
+
+@main.route("/tests", methods=["GET", "POST"])
+@login_required
+def test_view():
+    """main test method"""
+    user = current_user._get_current_object()
+    data = request.get_json()
 
     if request.method == "GET":
-        test = Test.query.filter_by(user_id=user.id).all()
-        return jsonify(test)
+        user_tests = user.tests
+        test_list = []
+        for test in user_tests:
+            test_list.append(test.to_dict())
+        return jsonify(test_list)
     else:
-        data = request.get_json()
         user_id = user.id
-        test = Test(user_id=user_id, subject=data.subject, score=data.score)
+        data["user_id"] = user_id
+        test = Test(**data)
         db.session.add(test)
         db.session.commit()
-        return jsonify(test)
+        return jsonify(test.to_dict())
 
 
 @main.route("/test", methods=["GET"])

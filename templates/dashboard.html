@@ -3,4 +3,20 @@
 <h1 class="title">
     Welcome {{current_user.first_name }}
 </h1>
+<div>
+    {% for test in tests|sort(attribute='created_at', reverse=True) %}
+     <div style="padding: 10px; background-color: {{ loop.cycle('#EEE', '#e6f9ff') }}; margin: 20px">
+         <p>{{ test.subject }}</p>
+         <li><strong>Score:</strong> {{ test.score }} <strong>Submited:</strong> {{ test.created_at }}</li>
+     </div>
+     {% else %}
+     <div style="padding: 20px; background-color: #1f6479; margin: 20px">
+        <p>You have done no test. <a href="{{ url_for('main.test_form') }}" class="navbar-item"> Take test </a></p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock%}
+{% block scripts %}
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard-script.js')}}"></script>
+{% endblock %}

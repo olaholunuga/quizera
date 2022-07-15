@@ -54,9 +54,8 @@
         </div>
     </section>
 
-    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='mustache.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='main-script.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>

@@ -10,6 +10,12 @@ $(function() {
     var $box = $("#box");
     var $questionTemplate = $("#question-template").html();
 
+    var letTest = {
+      category,
+      difficulty,
+      country
+  };
+
 
     function shuffle(array) {
       let currentIndex = array.length,  randomIndex;
@@ -59,11 +65,10 @@ $(function() {
     }
 
     $("#take-test").on("click", () => {
-        var letTest = {
-            category: $category.val(),
-            difficulty: $difficulty.val(),
-            country: $country.val()
-        };
+      letTest.category = $category.val()
+      letTest.difficulty = $difficulty.val()
+      letTest.country = $country.val()
+
         $("#test-query").css("display", "none");
         $("#test-query").remove()
         $.ajax({
@@ -94,28 +99,47 @@ $(function() {
 
     $box.delegate(".next", "click", () => {
       let mark = $("input[name=answer]:checked", ".options").prop("id");
-      let done = 0;
 
       if (!mark) {
         return alert("pick an answer");
       }
       index = $(".next").attr("ques-i");
       index = Number(index);
-      if ((mark == $questionList[index].correctAnswer) && (done == 0)) {
-        result += 5;
-        $("#result").html(`${result}`);
-      }
 
       index += 1;
       if (index < $questionList.length) {
+        index--
+        if (mark == $questionList[index].correctAnswer) {
+          result += 5;
+          $("#result").html(`${result}`);
+        }
         document.getElementById("question-template").innerHTML = "";
-        question_view($questionList[index]);
-      } else {
+        question_view($questionList[index + 1]);
+
+      } else if (index == $questionList.length) {
+        index--
+        if (mark == $questionList[index].correctAnswer) {
+          result += 5;
+          $("#result").html(`${result}`);
+        }
+        var data = {
+          subject: String(letTest.category),
+          score: result
+        };
+        $.ajax({
+          type: "POST",
+          url: "/tests",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          success: (response) => {
+            alert(response);
+          },
+          error: () => {
+            alert("error saving result");
+          }
+        });
         alert(`${result}`);
-        
       }
-
-
 
     })
 });

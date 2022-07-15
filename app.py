@@ -47,7 +47,6 @@ def user_loader(user_id):
 
 @app.teardown_appcontext
 def teardown_app(exc):
-
     pass
 
 
