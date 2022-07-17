@@ -132,7 +132,8 @@ $(function() {
           data: JSON.stringify(data),
           contentType: "application/json",
           success: (response) => {
-            alert(response);
+            alert("done");
+            console.log(response)
           },
           error: () => {
             alert("error saving result");

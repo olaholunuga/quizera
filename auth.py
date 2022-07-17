@@ -74,4 +74,4 @@ def logout():
 def unauthorized():
     
     flash("You must be loged in to view that page")
-    redirect("auth.login")
+    return redirect(url_for("auth.login"))

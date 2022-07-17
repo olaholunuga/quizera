@@ -279,7 +279,6 @@ $(function() {
 
         
     });
-  
 
     $box.delegate(".next", "click", () => {
       let mark = $("input[name=answer]:checked", ".options").prop("id");

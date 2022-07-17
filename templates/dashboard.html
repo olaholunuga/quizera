@@ -10,8 +10,8 @@
          <li><strong>Score:</strong> {{ test.score }} <strong>Submited:</strong> {{ test.created_at }}</li>
      </div>
      {% else %}
-     <div style="padding: 20px; background-color: #1f6479; margin: 20px">
-        <p>You have done no test. <a href="{{ url_for('main.test_form') }}" class="navbar-item"> Take test </a></p>
+     <div style="padding: 20px; background-color: #1f6479; margin: 10px">
+        <h6>You have done no test. &nbsp; <a href="{{ url_for('main.test_form') }}" class="navbar-item"> Take test </a></h6>
     </div>
     {% endfor %}
 </div>
